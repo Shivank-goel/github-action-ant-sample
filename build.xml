@@ -1,0 +1,27 @@
+<project name="github-action-ant-example" basedir=".">
+
+    <target name="echo">
+        <echo message="Ant build is working!" />
+    </target>
+
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="com.github-action-ant-example.Main" classpath="${classes.dir}">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+            </classpath>
+        </java>
+    </target>
+</project>
